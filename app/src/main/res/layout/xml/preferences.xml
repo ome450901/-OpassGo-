@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="一般">
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="debug_mode"
+            android:summary="開啟顯示Log Text and Preview"
+            android:title="Debug模式"/>
+
+        <Preference
+            android:key="mobile_info"
+            android:summary=""
+            android:title="關於手機"/>
+
+        <Preference
+            android:key="appVersion"
+            android:summary="版本"
+            android:title="版本編號"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="店家設定">
+
+        <Preference
+            android:key="storeNum"
+            android:summary="CHT 101"
+            android:title="店號"/>
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="traffic_mode"
+            android:summary="設備將會進行店內人流偵測"
+            android:title="人流偵測設定"/>
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="promo_zone_mode"
+            android:summary="活動特區專屬，開啟後需掃描QRCode設定設備"
+            android:title="特區設定"/>
+
+        <Preference
+            android:key="logout"
+            android:title="註銷"/>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

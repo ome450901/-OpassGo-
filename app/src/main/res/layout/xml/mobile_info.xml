@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="一般">
+
+        <Preference
+            android:key="brand"
+            android:summary="Sony"
+            android:title="品牌"/>
+
+        <Preference
+            android:key="model"
+            android:summary="Z7"
+            android:title="型號"/>
+
+        <Preference
+            android:key="version"
+            android:summary="5.1.1"
+            android:title="系統版本"/>
+
+        <Preference
+            android:key="screen_size"
+            android:summary="1920x1080"
+            android:title="螢幕尺寸"/>
+
+    </PreferenceCategory>
+
+
+</PreferenceScreen>
