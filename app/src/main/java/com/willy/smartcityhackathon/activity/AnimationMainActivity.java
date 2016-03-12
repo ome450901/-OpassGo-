@@ -16,7 +16,7 @@ import butterknife.Bind;
 /**
  * Created by Willy on 2016/3/11.
  */
-public class AnimationAnimationActivity extends BaseAnimationActivity {
+public class AnimationMainActivity extends BaseAnimationActivity {
 
     @Bind(R.id.rvFeed)
     RecyclerView rvFeed;
@@ -29,7 +29,7 @@ public class AnimationAnimationActivity extends BaseAnimationActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_animation_main);
 
         if (savedInstanceState == null) {
             pendingIntroAnimation = true;
