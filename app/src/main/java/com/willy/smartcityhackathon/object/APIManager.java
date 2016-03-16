@@ -2,18 +2,13 @@ package com.willy.smartcityhackathon.object;
 
 import android.util.Log;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.RequestFuture;
 import com.willy.smartcityhackathon.App;
-
-import org.json.JSONArray;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.ExecutionException;
+import com.willy.smartcityhackathon.object.api.CandidateFoods;
+import com.willy.smartcityhackathon.object.api.FoodCondition;
 
 /**
  * Created by Willy on 2015/10/22.
@@ -22,7 +17,8 @@ public class APIManager {
 
     public static final String TAG = "APIManager";
 
-    private static final String Host = "http://60.251.3.38/device/api";
+    private static final String Host = "https://lit-coast-30973.herokuapp.com";
+//    private static final String Host = "http://private-34b3f6-hackbudget.apiary-mock.com";
 
     private OnResponseListener onResponseListener;
 
@@ -33,24 +29,29 @@ public class APIManager {
     }
 
     private void sendRequest(Request request) {
+
         App.getInstance().getVolleyRequestQueue().add(request);
     }
 
-    public void sendPutRequest() {
-        Map<String, Object> params = new HashMap<>();
-        params.put("data", 1);
+    public void getCandidateFoods(FoodCondition foodCondition) {
 
-        String url = Host;
+        String url = Host + "/food/candidate?total_budget=%1$s&staple_enable=%2$s&staple_budget=%3$s&snack_enable=%4$s&snack_budget=%5$s&drink_enable=%6$s&drink_budget=%7$s";
+        url = String.format(url,foodCondition.getTotalBudget(),foodCondition.isStapleEnable(),
+                foodCondition.getStapleBudget(),foodCondition.isSnackEnable(),
+                foodCondition.getSnackBudget(),foodCondition.isDrinkEnable(),foodCondition.getDrinkBudget());
 
-        GenericRequest<Object> request = new GenericRequest<>(
-                Request.Method.PUT,
+        GenericRequest<CandidateFoods> request = new GenericRequest<>(
+                Request.Method.GET,
                 url,
-                Object.class,
-                params,
-                new Response.Listener<Object>() {
+                CandidateFoods.class,
+                null,
+                new Response.Listener<CandidateFoods>() {
 
                     @Override
-                    public void onResponse(Object response) {
+                    public void onResponse(CandidateFoods response) {
+                        if(getOnResponseListener()!=null){
+                            getOnResponseListener().onResponse(response);
+                        }
                         Log.d(TAG, "response : " + response);
                     }
                 },
@@ -58,79 +59,20 @@ public class APIManager {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        if(getOnResponseListener()!=null){
+                            getOnResponseListener().onErrorResponse(error);
+                        }
                         Log.d(TAG, error.toString());
                     }
                 }
         );
 
-        sendRequest(request);
-    }
-
-
-    public void sendPostRequest() {
-
-        Map<String, Object> params = new HashMap<>();
-        params.put("data", 1);
-
-        String url = Host;
-
-        GenericRequest<Object> request = new GenericRequest<>(
-                Request.Method.POST,
-                url,
-                Object.class,
-                params,
-                new Response.Listener<Object>() {
-
-                    @Override
-                    public void onResponse(Object response) {
-                        Log.d(TAG, "response : " + response);
-                    }
-                },
-                new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.d(TAG, error.toString());
-                    }
-                }
-        );
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                50000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
         sendRequest(request);
-    }
-
-    public void sendJsonArrayRequest() {
-
-        String url = Host ;
-
-        JsonArrayRequest request = new JsonArrayRequest(url,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.e(TAG, error.toString());
-                    }
-                });
-
-        sendRequest(request);
-    }
-
-    public void sendRequestBySync() {
-
-        String url = Host;
-
-        RequestFuture<JSONArray> future = RequestFuture.newFuture();
-        JsonArrayRequest request = new JsonArrayRequest(url, future, future);
-        sendRequest(request);
-
-        try {
-            JSONArray responseJsonArray = future.get();
-        } catch (InterruptedException | ExecutionException e) {
-            Log.e(TAG, "getRemoteRecipesBySync error:" + e.toString());
-        }
     }
 
     public OnResponseListener getOnResponseListener() {
