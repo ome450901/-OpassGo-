@@ -1,0 +1,68 @@
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/iv_bg"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:scaleType="centerCrop"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center">
+
+        <EditText
+            android:id="@+id/edt_budget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="想花多少錢呢？"
+            android:inputType="number"
+            android:gravity="center"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="138dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/edt_budget"
+            android:layout_toEndOf="@+id/edt_budget"
+            android:layout_toRightOf="@+id/edt_budget"
+            android:text="元"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textStyle="bold"/>
+
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/btn_search"
+            android:background="@mipmap/search"
+            android:scaleType="centerCrop"
+            android:layout_below="@+id/edt_budget"
+            android:layout_toLeftOf="@+id/btn_setting"
+            android:layout_toStartOf="@+id/btn_setting"/>
+
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/btn_setting"
+            android:background="@mipmap/setting"
+            android:scaleType="centerCrop"
+            android:layout_alignTop="@+id/btn_search"
+            android:layout_alignRight="@+id/edt_budget"
+            android:layout_alignEnd="@+id/edt_budget"/>
+    </RelativeLayout>
+
+</FrameLayout>

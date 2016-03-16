@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">App</string>
-
-    <string-array name="screenNum">
-        <item name="screen1">Screen #1</item>
-        <item name="screen2">Screen #2</item>
-        <item name="screen3">Screen #3</item>
-        <item name="screen4">Screen #4</item>
-        <item name="screen5">Screen #5</item>
-    </string-array>
+    <string name="app_name">阿發購</string>
 
     <string name="checking">Checking&#8230;</string>
 

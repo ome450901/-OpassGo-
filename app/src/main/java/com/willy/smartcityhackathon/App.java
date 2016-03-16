@@ -9,6 +9,7 @@ import android.view.WindowManager;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.willy.smartcityhackathon.object.api.FoodCondition;
 
 /**
  * Created by Willy on 2015/11/12.
@@ -21,6 +22,7 @@ public class App extends Application {
 
     private SharedPreferences mSharedPreferences;
 
+    public static FoodCondition sFoodCondition = new FoodCondition();
     @Override
     public void onCreate() {
         super.onCreate();
